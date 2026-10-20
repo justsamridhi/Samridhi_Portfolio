@@ -204,56 +204,55 @@
       }
 
       /* Main standing avatar */
-.avatar-wrapper {
-  opacity: 0;
-  transform: scale(0.95);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      .avatar-wrapper {
+        opacity: 0;
+        transform: scale(0.95);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        position: relative;
+        z-index: 4;
+        width: 210px;
+        height: 390px;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        cursor: pointer;
 
-  position: relative;
-  z-index: 4;
-  width: 210px;
-  height: 390px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  cursor: pointer;
-  transition: transform 0.25s var(--ease);
+        &:hover {
+          transform: translateY(-2px);
+        }
 
-  &:hover {
-    transform: translateY(-2px);
-  }
+        &.reveal {
+          opacity: 1;
+          transform: scale(1);
+          transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
 
-  &.reveal {
-    opacity: 1;
-    transform: scale(1);
-  }
+        .avatar-standing-img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          image-rendering: pixelated;
+          position: relative;
+          z-index: 2;
+        }
 
-  .avatar-standing-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    image-rendering: pixelated;
-    position: relative;
-    z-index: 2;
-  }
-
-  .avatar-scanline-fade {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 110px;
-    background: repeating-linear-gradient(
-      to bottom,
-      transparent,
-      transparent 3px,
-      rgba(24, 22, 21, 0.4) 3px,
-      rgba(24, 22, 21, 0.4) 5px
-    ), linear-gradient(to bottom, transparent 0%, rgba(24, 22, 21, 0.95) 100%);
-    pointer-events: none;
-    z-index: 3;
-  }
-}
+        .avatar-scanline-fade {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 110px;
+          background: repeating-linear-gradient(
+            to bottom,
+            transparent,
+            transparent 3px,
+            rgba(24, 22, 21, 0.4) 3px,
+            rgba(24, 22, 21, 0.4) 5px
+          ), linear-gradient(to bottom, transparent 0%, rgba(24, 22, 21, 0.95) 100%);
+          pointer-events: none;
+          z-index: 3;
+        }
+      }
 
       /* Status speech bubble on top right */
       .status-bubble-card {

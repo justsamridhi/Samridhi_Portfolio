@@ -7,16 +7,28 @@ export const Hero = () => {
   useEffect(() => {
     const avatarEl = avatarRef.current;
     if (!avatarEl) return;
+
+    // Fallback: if the observer doesn't fire within 1s (e.g. hero already in view), reveal anyway
+    const fallback = setTimeout(() => {
+      if (avatarEl && !avatarEl.classList.contains('reveal')) {
+        avatarEl.classList.add('reveal');
+      }
+    }, 1000);
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           avatarEl.classList.add('reveal');
           observer.unobserve(avatarEl);
+          clearTimeout(fallback);
         }
       });
-    }, { threshold: 0.5 });
+    }, { threshold: 0.1 });
     observer.observe(avatarEl);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      clearTimeout(fallback);
+    };
   }, []);
   // Witty quotes list with quotation marks
   const devQuotes = [
@@ -134,7 +146,7 @@ export const Hero = () => {
             <div className="arch-backdrop" aria-hidden="true" />
 
             {/* Main Character Avatar standing in the center */}
-            <div className="avatar-wrapper" title="Samridhi Gupta">
+            <div ref={avatarRef} className="avatar-wrapper" title="Samridhi Gupta">
               <img
                 src="/assets/samridhi_individual_avatar_poses/01_pose_standing.png"
                 alt="Samridhi Gupta pixel art avatar"
