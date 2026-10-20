@@ -1,0 +1,1 @@
+Individual transparent PNGs cropped from Samridhi's avatar sticker sheet. Files are named by pose/expression.

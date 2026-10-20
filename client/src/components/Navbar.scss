@@ -1,0 +1,128 @@
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.1rem clamp(1.25rem, 5vw, 4rem) 1.1rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+
+  .mark {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.35rem;
+    letter-spacing: 0.05em;
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+
+    .logo-s {
+      color: var(--ink);
+    }
+
+    .logo-g {
+      color: var(--orange);
+    }
+  }
+
+  .nav {
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+    .nav-link {
+      padding: 0.35rem 0.95rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      background: transparent;
+      font-size: 0.84rem;
+      font-weight: 500;
+      color: var(--ink);
+      transition: all 0.2s var(--ease);
+
+      &:hover {
+        border-color: rgba(255, 255, 255, 0.5);
+        background: rgba(255, 255, 255, 0.06);
+      }
+    }
+  }
+
+  .tools {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    .tool {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s var(--ease);
+
+      &:hover {
+        border-color: var(--line-strong);
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      &.is-active {
+        color: var(--ink);
+        border-color: var(--sage);
+      }
+    }
+
+    .mobile-toggle {
+      display: none;
+      font-size: 1.25rem;
+      padding: 0.2rem 0.5rem;
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--paper);
+    }
+  }
+}
+
+@media (max-width: 860px) {
+  .top {
+    .tools .mobile-toggle {
+      display: block;
+    }
+
+    .nav {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--paper);
+      border-bottom: 2px solid var(--ink);
+      padding: 1rem 1.5rem;
+      flex-direction: column;
+      gap: 0.6rem;
+      display: none;
+      box-shadow: 0 8px 16px var(--shadow);
+
+      &.is-open {
+        display: flex;
+      }
+
+      .nav-link {
+        width: 100%;
+        text-align: center;
+        padding: 0.5rem;
+      }
+    }
+  }
+}

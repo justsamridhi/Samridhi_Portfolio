@@ -1,0 +1,310 @@
+/* Color tokens and typography - Default to Dark Desk aesthetic */
+:root {
+  --bg: #181615;
+  --paper: #221f1d;
+  --paper-elevated: #282522;
+  --ink: #f2ede4;
+  --muted: #a3998e;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --sage: #a3b88c;
+  --sage-ink: #182210;
+  --peach: #f8c9a0;
+  --orange: #e58a36;
+  --ascii: #e58a36;
+  --shadow: rgba(0, 0, 0, 0.45);
+  --display: "Silkscreen", "Pixelify Sans", monospace;
+  --body: "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: "Geist Mono", ui-monospace, Menlo, Consolas, monospace;
+  --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  color-scheme: dark;
+}
+
+[data-theme="light"] {
+  --bg: #f5ece1;
+  --paper: #faf4ea;
+  --paper-elevated: #ffffff;
+  --ink: #221f1c;
+  --muted: #736b62;
+  --line: rgba(34, 31, 28, 0.12);
+  --line-strong: rgba(34, 31, 28, 0.22);
+  --sage: #93ab7a;
+  --sage-ink: #1a250f;
+  --peach: #f5c49b;
+  --orange: #d9700f;
+  --ascii: #b5651d;
+  --shadow: rgba(34, 31, 28, 0.15);
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--bg);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100svh;
+  background: var(--bg);
+  color: var(--ink);
+  font: 1rem/1.6 var(--body);
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.5s var(--ease), color 0.5s var(--ease);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Background pixel grid pattern */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: radial-gradient(color-mix(in srgb, var(--ink) 9%, transparent) 0.8px, transparent 0.8px);
+  background-size: 14px 14px;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+  position: relative;
+  z-index: 1;
+}
+
+main {
+  flex: 1 1 0%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input, textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.wrap {
+  width: min(1120px, 100% - clamp(2.5rem, 10vw, 6rem));
+  margin-inline: auto;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--display);
+  font-weight: 700;
+  line-height: 1.08;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.35rem;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.eyebrow {
+  color: var(--muted);
+  font: 500 0.75rem/1.4 var(--mono);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  margin-bottom: 0.55rem;
+}
+
+/* Standard Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.35rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  background: var(--paper);
+  color: var(--ink);
+  transition: transform 0.2s var(--ease), background 0.2s var(--ease), border-color 0.2s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn.sage {
+  background: var(--sage);
+  color: var(--sage-ink);
+  border-color: var(--sage);
+  font-weight: 600;
+}
+
+.btn.sage:hover {
+  background: #b5cca0;
+  border-color: #b5cca0;
+}
+
+.btn.cream, .btn.light {
+  background: #fbf8f2;
+  color: #181615;
+  border-color: #fbf8f2;
+  font-weight: 600;
+}
+
+.btn.cream:hover, .btn.light:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+}
+
+.btn.dark {
+  background: #252220;
+  color: #f2ede4;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn.dark:hover {
+  background: #2f2b28;
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.btn.peach {
+  background: var(--peach);
+  color: #181615;
+  border-color: var(--peach);
+}
+
+.btn[aria-disabled="true"], .btn:disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--muted);
+}
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 1.6rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+
+.card:hover {
+  border-color: var(--line-strong);
+}
+
+.section {
+  padding-block: clamp(2rem, 6vh, 4rem);
+}
+
+/* Sticker Mode Global Styling & Placement Layer */
+.app-root.sticker-mode-on {
+  cursor: crosshair;
+
+  a, button, input, textarea {
+    cursor: crosshair;
+  }
+}
+
+.global-floating-stickers-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+
+  .floating-reaction-badge {
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(var(--tilt, 0deg));
+    animation: stickerAppearAndFade 5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45));
+
+    .floating-reaction-avatar {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+      image-rendering: pixelated;
+    }
+  }
+}
+
+@keyframes stickerAppearAndFade {
+  0% {
+    transform: translate(-50%, -50%) scale(0.4) rotate(var(--tilt, 0deg));
+    opacity: 0;
+  }
+  8% {
+    transform: translate(-50%, -50%) scale(1.15) rotate(var(--tilt, 0deg));
+    opacity: 1;
+  }
+  15% {
+    transform: translate(-50%, -50%) scale(1) rotate(var(--tilt, 0deg));
+    opacity: 1;
+  }
+  80% {
+    transform: translate(-50%, -50%) scale(1) rotate(var(--tilt, 0deg));
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -75px) scale(0.9) rotate(calc(var(--tilt, 0deg) + 4deg));
+    opacity: 0;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

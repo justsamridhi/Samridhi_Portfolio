@@ -1,0 +1,114 @@
+.about-section {
+  .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .about-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+
+    .avatar-art-badge {
+      align-self: flex-start;
+      width: clamp(120px, 20vw, 160px);
+      border: 1.5px solid var(--line);
+      border-radius: 14px;
+      padding: 0.5rem;
+      background: var(--bg);
+      box-shadow: 2px 2px 0 var(--shadow);
+
+      .art-pose-img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+        image-rendering: pixelated;
+      }
+    }
+
+    .bio-text {
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--ink);
+
+      p + p {
+        margin-top: 0.9rem;
+      }
+
+      strong {
+        color: var(--orange);
+      }
+    }
+
+    .quick-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      padding-top: 1.2rem;
+      border-top: 1px dashed var(--line);
+
+      .fact-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+
+        .fact-label {
+          font-family: var(--mono);
+          font-size: 0.75rem;
+          color: var(--muted);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .fact-val {
+          font-weight: 600;
+          font-size: 0.95rem;
+          color: var(--ink);
+        }
+      }
+    }
+  }
+
+  .values-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    .value-card {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1.2rem;
+
+      .value-icon {
+        width: 44px;
+        height: 44px;
+        margin-bottom: 0.3rem;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      h3 {
+        font-size: 1.15rem;
+      }
+
+      p {
+        font-size: 0.92rem;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+@media (max-width: 860px) {
+  .about-section .about-grid {
+    grid-template-columns: 1fr;
+  }
+}

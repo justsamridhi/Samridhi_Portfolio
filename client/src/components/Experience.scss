@@ -1,0 +1,80 @@
+.experience-section {
+  .timeline-container {
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+
+    .timeline {
+      list-style: none;
+      position: relative;
+      padding-left: 2rem;
+      margin: 0;
+
+      /* Vertical dashed timeline track */
+      &::before {
+        content: "";
+        position: absolute;
+        left: 8px;
+        top: 10px;
+        bottom: 10px;
+        width: 2px;
+        background: repeating-linear-gradient(var(--ink) 0 6px, transparent 6px 12px);
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-bottom: 2.2rem;
+
+        &:last-child {
+          padding-bottom: 0;
+        }
+
+        .timeline-dot {
+          position: absolute;
+          left: -2rem;
+          top: 0.35rem;
+          width: 18px;
+          height: 18px;
+          border-radius: 50%;
+          border: 2px solid var(--ink);
+          background: var(--sage);
+          box-shadow: 0 0 0 4px var(--paper);
+        }
+
+        &.education .timeline-dot {
+          background: var(--peach);
+        }
+
+        .timeline-content {
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+
+          .when {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--muted);
+          }
+
+          h3 {
+            font-size: 1.25rem;
+            color: var(--ink);
+          }
+
+          .organization {
+            font-family: var(--mono);
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--orange);
+          }
+
+          p {
+            font-size: 0.94rem;
+            color: var(--muted);
+            line-height: 1.55;
+            max-width: 65ch;
+            margin-top: 0.2rem;
+          }
+        }
+      }
+    }
+  }
+}

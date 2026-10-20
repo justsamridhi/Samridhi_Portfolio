@@ -1,0 +1,79 @@
+.creative-corner-section {
+  padding-block: clamp(2.5rem, 5vh, 4rem);
+
+  .pixel-heading {
+    font-family: var(--display);
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    color: var(--ink);
+  }
+
+  .creative-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.8rem;
+    margin-top: 1.8rem;
+  }
+
+  .creative-card {
+    background: var(--paper);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    align-items: center;
+
+    .easel-art-frame {
+      width: 170px;
+      height: 190px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .easel-avatar-img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        image-rendering: pixelated;
+      }
+    }
+
+    .polaroid-duo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      height: 190px;
+
+      .polaroid-print {
+        width: 120px;
+        transform: rotate(-6deg);
+        filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.4));
+      }
+
+      .camera-object {
+        width: 80px;
+        transform: rotate(4deg);
+        filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.35));
+      }
+    }
+
+    .creative-info {
+      text-align: center;
+
+      h3 {
+        font-family: var(--display);
+        font-size: 1.15rem;
+        color: #f2ede4;
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        font-size: 0.9rem;
+        color: #aba194;
+        line-height: 1.55;
+      }
+    }
+  }
+}

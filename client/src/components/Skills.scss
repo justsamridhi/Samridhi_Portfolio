@@ -1,0 +1,184 @@
+.skills-section {
+  .category-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+
+    .cat-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.45rem 1rem;
+      border: 1.5px solid var(--ink);
+      border-radius: 999px;
+      background: var(--paper);
+      color: var(--ink);
+      font-weight: 500;
+      font-size: 0.88rem;
+      box-shadow: 2px 2px 0 var(--shadow);
+      transition: transform 0.2s, background 0.2s;
+
+      .cat-icon {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
+      }
+
+      &:hover {
+        transform: translateY(-2px);
+        background: var(--peach);
+      }
+
+      &.is-active {
+        background: var(--sage);
+        color: var(--sage-ink);
+        border-color: var(--ink);
+        font-weight: 600;
+      }
+    }
+  }
+
+  .skills-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .cat-title-row {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px dashed var(--line);
+
+      .header-icon {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+      }
+
+      h3 {
+        font-size: 1.35rem;
+      }
+    }
+
+    .skills-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+
+      .skill-item {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding: 0.6rem 0.8rem;
+        border: 1px solid transparent;
+        border-radius: 10px;
+        transition: background 0.2s, border-color 0.2s;
+
+        &:hover, &:focus-visible {
+          background: color-mix(in srgb, var(--paper) 60%, var(--bg));
+          border-color: var(--line);
+        }
+
+        .skill-meta {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .skill-name {
+            font-weight: 600;
+            font-size: 0.96rem;
+            color: var(--ink);
+          }
+
+          .tier-badge {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.15rem 0.5rem;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+
+            &.core {
+              background: color-mix(in srgb, var(--sage) 35%, var(--bg));
+              color: var(--sage-ink);
+            }
+
+            &.comfortable {
+              background: color-mix(in srgb, var(--peach) 45%, var(--bg));
+              color: var(--ink);
+            }
+
+            &.exploring {
+              background: color-mix(in srgb, var(--orange) 25%, var(--bg));
+              color: var(--orange);
+            }
+          }
+        }
+
+        .meter-track {
+          height: 10px;
+          border: 1.5px solid var(--ink);
+          border-radius: 999px;
+          background: var(--bg);
+          overflow: hidden;
+
+          .meter-bar {
+            height: 100%;
+            border-radius: 999px;
+            transition: width 0.6s var(--ease);
+
+            &.core {
+              background: var(--sage);
+            }
+
+            &.comfortable {
+              background: var(--peach);
+            }
+
+            &.exploring {
+              background: repeating-linear-gradient(90deg, var(--orange) 0 6px, transparent 6px 10px);
+            }
+          }
+        }
+
+        .skill-desc-inline {
+          font-size: 0.82rem;
+          color: var(--muted);
+          line-height: 1.4;
+        }
+      }
+    }
+
+    .skills-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.2rem;
+      padding-top: 1rem;
+      border-top: 1px dashed var(--line);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+
+        .dot {
+          width: 10px;
+          height: 10px;
+          border-radius: 50%;
+          border: 1px solid var(--ink);
+
+          &.core { background: var(--sage); }
+          &.comfortable { background: var(--peach); }
+          &.exploring { background: var(--orange); }
+        }
+      }
+    }
+  }
+}
