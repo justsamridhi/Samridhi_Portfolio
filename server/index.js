@@ -44,8 +44,9 @@ app.use(cors({
   credentials: true,
 }));
 
-// Body parsing (limit to 2kb to accommodate pixel data)
-app.use(express.json({ limit: '2kb' }));
+// Body parsing — 10kb comfortably fits the 256-cell pixel grid payload (~3kb)
+// while still blocking unreasonably large requests.
+app.use(express.json({ limit: '10kb' }));
 
 // Health check route
 app.get('/api/health', async (req, res) => {
