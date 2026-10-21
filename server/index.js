@@ -18,10 +18,16 @@ const app = express();
 
 // Security middlewares
 app.use(helmet());
+
+const allowedOrigin = process.env.CLIENT_ORIGIN;
 app.use(cors({
-  origin: process.env.CLIENT_ORIGIN || '*',
+  // When CLIENT_ORIGIN is set (production), use that specific origin so
+  // credentialed requests work. Fall back to '*' only in local dev where
+  // credentials aren't needed.
+  origin: allowedOrigin || '*',
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
-  credentials: true,
+  // credentials can only be true when origin is not '*'
+  credentials: !!allowedOrigin,
 }));
 
 // Body parsing (limit to 2kb to accommodate pixel data)

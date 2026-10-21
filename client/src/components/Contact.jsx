@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { apiUrl } from '../utils/api';
 import './Contact.scss';
 
 export const Contact = () => {
@@ -51,7 +52,7 @@ export const Contact = () => {
 
     try {
       // Prepared for Express backend integration (/api/contact)
-      const res = await fetch('/api/contact', {
+      const res = await fetch(apiUrl('/api/contact'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData)

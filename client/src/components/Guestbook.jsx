@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { stickerPack } from '../data/portfolioData';
 import { playPixelSound } from '../utils/sound';
+import { apiUrl } from '../utils/api';
 import './Guestbook.scss';
 
 export const Guestbook = ({
@@ -73,7 +74,7 @@ export const Guestbook = ({
       return;
     }
     try {
-      const res = await fetch('/api/guestbook', {
+      const res = await fetch(apiUrl('/api/guestbook'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ gridData: grid })
@@ -96,7 +97,7 @@ export const Guestbook = ({
 
   const handleApprovePending = async (id) => {
     try {
-      const res = await fetch(`/api/guestbook/${id}/approve`, {
+      const res = await fetch(apiUrl(`/api/guestbook/${id}/approve`), {
         method: 'PATCH',
         headers: { 'x-admin-secret': adminPasscode }
       });
@@ -116,7 +117,7 @@ export const Guestbook = ({
 
   const handleRejectPending = async (id) => {
     try {
-      const res = await fetch(`/api/guestbook/${id}`, {
+      const res = await fetch(apiUrl(`/api/guestbook/${id}`), {
         method: 'DELETE',
         headers: { 'x-admin-secret': adminPasscode }
       });
@@ -187,7 +188,7 @@ useEffect(() => {
 
 const fetchApproved = async () => {
   try {
-    const res = await fetch('/api/guestbook');
+    const res = await fetch(apiUrl('/api/guestbook'));
     if (res.ok) {
       const data = await res.json();
       setApprovedGallery(data);
@@ -203,7 +204,7 @@ const fetchApproved = async () => {
 
 const fetchPending = async () => {
   try {
-    const res = await fetch('/api/guestbook/pending', {
+    const res = await fetch(apiUrl('/api/guestbook/pending'), {
       headers: { 'x-admin-secret': adminPasscode }
     });
     if (res.ok) {

@@ -113,6 +113,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    position: relative;
 
     .workspace-stage {
       position: relative;
@@ -254,11 +255,12 @@
         }
       }
 
-      /* Status speech bubble on top right */
+      /* Status speech bubble — floats above the stage so it never overlaps shelf or avatar */
       .status-bubble-card {
         position: absolute;
-        top: 110px;
-        right: 0;
+        top: -52px;
+        left: 50%;
+        transform: translateX(-50%);
         background: #fbf7ee;
         color: #1f1d1a;
         font-family: var(--mono);
@@ -277,7 +279,7 @@
         transition: transform 0.2s var(--ease), box-shadow 0.2s;
 
         &:hover {
-          transform: translateY(-2px);
+          transform: translateX(-50%) translateY(-2px);
           box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
         }
 
@@ -458,6 +460,17 @@
 
         .sticker-painting-avatar {
           display: none; // hide dense secondary overlap on mobile
+        }
+
+        /* Responsive avatar scaling */
+        .avatar-wrapper {
+          width: 150px;
+          height: 280px;
+        }
+
+        /* Pill stays above the stage — just tweak vertical clearance on smaller screens */
+        .status-bubble-card {
+          top: -44px;
         }
       }
     }
