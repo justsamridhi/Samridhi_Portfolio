@@ -57,7 +57,7 @@ app.get('/api/deploy-check', (req, res) => {
   res.json({
     deployed: true,
     service: 'samridhi-portfolio-backend',
-    marker: 'deploy-check-2026-10-21'
+    marker: 'deploy-check-v2-guestbook-fix'
   });
 });
 // API routers
