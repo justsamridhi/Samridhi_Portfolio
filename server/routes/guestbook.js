@@ -1,4 +1,5 @@
 import express from 'express';
+import mongoose from 'mongoose';
 import Guestbook from '../models/Guestbook.js';
 
 const router = express.Router();
@@ -54,6 +55,11 @@ router.get('/pending', adminAuth, async (req, res, next) => {
 // Admin: approve submission
 router.patch('/:id/approve', adminAuth, async (req, res, next) => {
   try {
+    // Validate MongoDB ObjectId
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ error: 'Invalid entry id' });
+    }
+    
     const entry = await Guestbook.findById(req.params.id);
     if (!entry) return res.status(404).json({ error: 'Not found' });
     entry.status = 'approved';
@@ -67,6 +73,11 @@ router.patch('/:id/approve', adminAuth, async (req, res, next) => {
 // Admin: reject (delete) submission
 router.delete('/:id', adminAuth, async (req, res, next) => {
   try {
+    // Validate MongoDB ObjectId
+    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+      return res.status(400).json({ error: 'Invalid entry id' });
+    }
+    
     await Guestbook.findByIdAndDelete(req.params.id);
     res.json({ success: true });
   } catch (err) {

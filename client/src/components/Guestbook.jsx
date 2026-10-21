@@ -383,7 +383,7 @@ const fetchPending = async () => {
             ) : (
               <div className="mosaic-grid-gallery">
                 {approvedGallery.map(item => (
-                  <div key={item.id} className="mosaic-item-frame" title={`Drawn on ${item.date}`}>
+                  <div key={item._id} className="mosaic-item-frame" title={`Drawn on ${item.date}`}>
                     <div className="mosaic-thumb-grid">
                       {item.gridData.map((c, i) => (
                         <div key={i} style={{ backgroundColor: c }} />
@@ -528,7 +528,7 @@ const fetchPending = async () => {
                   ) : (
                     <div className="pending-grid">
                       {pendingQueue.map((item) => (
-                        <div key={item.id} className="pending-item card">
+                        <div key={item._id} className="pending-item card">
                           <div className="pending-preview-frame">
                             <div className="pending-thumb-grid">
                               {item.gridData.map((c, i) => (
@@ -543,14 +543,14 @@ const fetchPending = async () => {
                               <button
                                 type="button"
                                 className="btn sage btn-sm"
-                                onClick={() => handleApprovePending(item.id)}
+                                onClick={() => handleApprovePending(item._id)}
                               >
                                 ✓ Approve
                               </button>
                               <button
                                 type="button"
                                 className="btn dark btn-sm"
-                                onClick={() => handleRejectPending(item.id)}
+                                onClick={() => handleRejectPending(item._id)}
                               >
                                 ✕ Reject
                               </button>
@@ -569,3 +569,4 @@ const fetchPending = async () => {
     </section>
   );
 };
+

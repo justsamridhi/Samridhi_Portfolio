@@ -16,8 +16,10 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Security middlewares
-app.use(helmet());
+// Security middlewares - Configured for cross-origin API access
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" }
+}));
 
 const allowedOrigin = process.env.CLIENT_ORIGIN;
 
@@ -27,24 +29,28 @@ const allowedOrigins = allowedOrigin
   ? allowedOrigin.split(',').map(o => o.trim()).filter(Boolean)
   : [];
 
+// Debug logging for CORS issues
+console.log(CORS allowed origins: );
+
 app.use(cors({
   origin: (origin, callback) => {
     // Allow requests with no origin (curl, Postman, same-origin server calls)
     if (!origin) return callback(null, true);
-    // No CLIENT_ORIGIN set → dev mode, allow everything
+    // No CLIENT_ORIGIN set ? dev mode, allow everything
     if (allowedOrigins.length === 0) return callback(null, true);
     // Allow exact matches or any *.vercel.app preview subdomain
     const allowed =
       allowedOrigins.includes(origin) ||
       /^https:\/\/[^.]+\.vercel\.app$/.test(origin);
     if (allowed) return callback(null, true);
-    callback(new Error(`CORS: origin ${origin} not allowed`));
+    callback(new Error(CORS: origin  not allowed));
   },
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
   credentials: true,
+  allowedHeaders: ['Content-Type', 'x-admin-secret', 'Authorization'],
 }));
 
-// Body parsing — 10kb comfortably fits the 256-cell pixel grid payload (~3kb)
+// Body parsing � 10kb comfortably fits the 256-cell pixel grid payload (~3kb)
 // while still blocking unreasonably large requests.
 app.use(express.json({ limit: '10kb' }));
 
@@ -53,6 +59,7 @@ app.get('/api/health', async (req, res) => {
   const dbStatus = isConnected ? 'connected' : 'disconnected';
   res.json({ status: 'ok', dbConnected: isConnected, dbStatus });
 });
+
 app.get('/api/deploy-check', (req, res) => {
   res.json({
     deployed: true,
@@ -60,7 +67,8 @@ app.get('/api/deploy-check', (req, res) => {
     marker: 'deploy-check-v2-guestbook-fix'
   });
 });
-// API routers
+
+// API routers - ALL THREE should be mounted
 app.use('/api/contact', contactRouter);
 app.use('/api/resume', resumeRouter);
 app.use('/api/guestbook', guestbookRouter);
@@ -84,7 +92,7 @@ const PORT = process.env.PORT || 5000;
   try {
     await dbConnect();
     app.listen(PORT, () => {
-      console.log(`Server listening on http://localhost:${PORT}`);
+      console.log(Server listening on http://localhost:);
     });
   } catch (e) {
     console.error('Failed to start server:', e);
