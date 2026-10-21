@@ -38,7 +38,13 @@ app.get('/api/health', async (req, res) => {
   const dbStatus = isConnected ? 'connected' : 'disconnected';
   res.json({ status: 'ok', dbConnected: isConnected, dbStatus });
 });
-
+app.get('/api/deploy-check', (req, res) => {
+  res.json({
+    deployed: true,
+    service: 'samridhi-portfolio-backend',
+    marker: 'deploy-check-2026-10-21'
+  });
+});
 // API routers
 app.use('/api/contact', contactRouter);
 app.use('/api/resume', resumeRouter);
