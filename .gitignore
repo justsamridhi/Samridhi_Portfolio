@@ -3,6 +3,8 @@ node_modules/
 .env
 .env.*
 !.env.example
+# .env.production only contains a public backend URL (no secrets) — safe to commit
+!.env.production
 dist/
 coverage/
 *.log

@@ -20,14 +20,28 @@ const app = express();
 app.use(helmet());
 
 const allowedOrigin = process.env.CLIENT_ORIGIN;
+
+// Support multiple allowed origins via comma-separated CLIENT_ORIGIN
+// e.g. "https://samridhi.vercel.app,https://samridhi-git-main-justsamridhi.vercel.app"
+const allowedOrigins = allowedOrigin
+  ? allowedOrigin.split(',').map(o => o.trim()).filter(Boolean)
+  : [];
+
 app.use(cors({
-  // When CLIENT_ORIGIN is set (production), use that specific origin so
-  // credentialed requests work. Fall back to '*' only in local dev where
-  // credentials aren't needed.
-  origin: allowedOrigin || '*',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (curl, Postman, same-origin server calls)
+    if (!origin) return callback(null, true);
+    // No CLIENT_ORIGIN set → dev mode, allow everything
+    if (allowedOrigins.length === 0) return callback(null, true);
+    // Allow exact matches or any *.vercel.app preview subdomain
+    const allowed =
+      allowedOrigins.includes(origin) ||
+      /^https:\/\/[^.]+\.vercel\.app$/.test(origin);
+    if (allowed) return callback(null, true);
+    callback(new Error(`CORS: origin ${origin} not allowed`));
+  },
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
-  // credentials can only be true when origin is not '*'
-  credentials: !!allowedOrigin,
+  credentials: true,
 }));
 
 // Body parsing (limit to 2kb to accommodate pixel data)
