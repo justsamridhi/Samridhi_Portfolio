@@ -30,7 +30,7 @@ const allowedOrigins = allowedOrigin
   : [];
 
 // Debug logging for CORS issues
-console.log("CORS allowed origins:" );
+console.log("CORS allowed origins:");
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -43,7 +43,7 @@ app.use(cors({
       allowedOrigins.includes(origin) ||
       /^https:\/\/[^.]+\.vercel\.app$/.test(origin);
     if (allowed) return callback(null, true);
-    callback(new Error(CORS: origin  not allowed));
+    callback(new Error(`CORS: origin ${origin} not allowed`));
   },
   methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
   credentials: true,
@@ -92,7 +92,7 @@ const PORT = process.env.PORT || 5000;
   try {
     await dbConnect();
     app.listen(PORT, () => {
-      console.log(Server listening on http://localhost:);
+      console.log("Server listening on http://localhost:");
     });
   } catch (e) {
     console.error('Failed to start server:', e);
