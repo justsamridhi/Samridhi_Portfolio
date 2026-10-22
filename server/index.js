@@ -30,7 +30,7 @@ const allowedOrigins = allowedOrigin
   : [];
 
 // Debug logging for CORS issues
-console.log(CORS allowed origins: );
+console.log("CORS allowed origins:" );
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -50,7 +50,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'x-admin-secret', 'Authorization'],
 }));
 
-// Body parsing — 10kb comfortably fits the 256-cell pixel grid payload (~3kb)
+// Body parsing ï¿½ 10kb comfortably fits the 256-cell pixel grid payload (~3kb)
 // while still blocking unreasonably large requests.
 app.use(express.json({ limit: '10kb' }));
 
