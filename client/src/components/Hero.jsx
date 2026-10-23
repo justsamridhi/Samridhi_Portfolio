@@ -138,6 +138,7 @@ export const Hero = () => {
                 src="/assets/samridhi_ui_workspace_assets/01_workspace_shelf_cat_laptop.png"
                 alt="Workspace shelf with tech books, stickered laptop, mug, and sleeping cat"
                 className="shelf-img"
+                loading="eager"
               />
               <span className="art-tooltip">My Creative Desk • View About</span>
             </a>
@@ -151,6 +152,7 @@ export const Hero = () => {
                 src="/assets/samridhi_individual_avatar_poses/01_pose_standing.png"
                 alt="Samridhi Gupta pixel art avatar"
                 className="avatar-standing-img"
+                fetchPriority="high"
               />
               <div className="avatar-scanline-fade" aria-hidden="true" />
             </div>
@@ -176,6 +178,7 @@ export const Hero = () => {
               <img
                 src="/assets/samridhi_ui_workspace_assets/09_polaroid_sunset.png"
                 alt="Sunset polaroid reading good code brighter days"
+                loading="lazy"
               />
               <span className="art-tooltip">Golden Hour View</span>
             </a>
@@ -190,6 +193,7 @@ export const Hero = () => {
               <img
                 src="/assets/samridhi_ui_workspace_assets/27_retro_camera.png"
                 alt="Retro instant camera"
+                loading="lazy"
               />
               <span className="art-tooltip">Instant Camera</span>
             </a>
@@ -204,6 +208,7 @@ export const Hero = () => {
               <img
                 src="/assets/samridhi_individual_avatar_poses/07_pose_painting_canvas.png"
                 alt="Mini avatar painting on easel"
+                loading="lazy"
               />
               <span className="art-tooltip">Art Studio</span>
             </a>
@@ -218,6 +223,7 @@ export const Hero = () => {
               <img
                 src="/assets/samridhi_ui_workspace_assets/12_build_learn_checklist.png"
                 alt="Checklist note: Build, Learn, Explore, Grow"
+                loading="lazy"
               />
               <span className="art-tooltip">Core Principles</span>
             </a>
@@ -244,6 +250,7 @@ export const Hero = () => {
               <img
                 src="/assets/samridhi_ui_workspace_assets/02_sleeping_german_shepherd.png"
                 alt="Sleeping German Shepherd pet beside mug"
+                loading="lazy"
               />
               <span className="art-tooltip">Zzz...</span>
             </div>

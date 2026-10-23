@@ -47,11 +47,12 @@
     flex-direction: column;
     justify-content: space-between;
     min-height: 250px;
-    transition: all 0.25s var(--ease);
-
+    transition: all 0.25s var(--ease), box-shadow 0.25s ease;
+    
     &:hover {
       border-color: rgba(255, 255, 255, 0.25);
-      transform: translateY(-2px);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
     }
 
     &.stamp-armed {

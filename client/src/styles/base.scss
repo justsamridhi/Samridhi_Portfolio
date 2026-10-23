@@ -242,6 +242,44 @@ h3 {
   padding-block: clamp(2rem, 6vh, 4rem);
 }
 
+/* Subtle section reveal animations */
+.section-head {
+  animation: fadeSlideIn 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+/* Scroll reveal animation class */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+  
+  &.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Staggered children animations */
+.stagger-reveal > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.stagger-reveal.revealed > * {
+  opacity: 1;
+  transform: translateY(0);
+  
+  @for $i from 1 through 10 {
+    &:nth-child(#{$i}) {
+      transition-delay: #{$i * 0.08}s;
+    }
+  }
+}
+
 /* Sticker Mode Global Styling & Placement Layer */
 .app-root.sticker-mode-on {
   cursor: crosshair;
@@ -307,4 +345,28 @@ h3 {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Animation keyframes for sections */
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle card hover lift effect */
+.card {
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+/* Smooth link hover transitions */
+a {
+  transition: color 0.2s ease, transform 0.2s ease;
 }

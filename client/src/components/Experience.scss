@@ -37,6 +37,7 @@
           border: 2px solid var(--ink);
           background: var(--sage);
           box-shadow: 0 0 0 4px var(--paper);
+          animation: timelineDotPulse 3s ease-in-out infinite;
         }
 
         &.education .timeline-dot {
@@ -76,5 +77,15 @@
         }
       }
     }
+  }
+}
+
+/* Timeline animation keyframes */
+@keyframes timelineDotPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 4px var(--paper);
+  }
+  50% {
+    box-shadow: 0 0 0 4px var(--paper), 0 0 12px var(--sage);
   }
 }

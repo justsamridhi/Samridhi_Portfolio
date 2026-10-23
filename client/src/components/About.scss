@@ -27,6 +27,7 @@
         background: var(--sage);
         box-shadow: 0 0 6px var(--sage);
         flex-shrink: 0;
+        animation: statusPulse 2.5s ease-in-out infinite;
       }
     }
   }
@@ -132,11 +133,47 @@
     perspective: 1200px;
     max-width: 760px;
     width: 100%;
-    margin-inline: auto; /* Centered */
+    margin-inline: auto; /* Center horizontally */
     margin-bottom: 2.5rem;
     cursor: pointer;
     user-select: text;
-    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.35s var(--ease);
+    /* Entrance animation */
+    opacity: 1;
+    animation: idCardEnter 0.6s ease-out forwards;
+    animation-delay: 0.2s;
+  }
+
+  .id-card-stage:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .id-card-flipper {
+    position: relative;
+    display: grid;
+    width: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.34, 1.2, 0.64, 1);
+  }
+
+  .show-creative .id-card-flipper {
+    transform: rotateY(180deg);
+  }
+  /* Duplicate stray block removed – centering handled above */
+  align-items: center;
+  opacity: 1;
+  animation: idCardEnter 0.6s ease-out forwards;
+  animation-delay: 0.2s;
+  transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1),
+              box-shadow 0.35s var(--ease);
+
+  &:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+
+    /* Duplicate block removed – centering handled above */
 
     &:hover {
       transform: translateY(-3px);
@@ -496,7 +533,7 @@
       }
     }
   }
-}
+
 
 /* Panel FadeIn Keyframe */
 @keyframes panelFadeIn {
@@ -605,11 +642,25 @@
   }
 }
 
+/* Animation Keyframes */
+@keyframes statusPulse {
+  0%, 100% {
+    box-shadow: 0 0 6px var(--sage);
+  }
+  50% {
+    box-shadow: 0 0 14px var(--sage), 0 0 20px var(--sage);
+  }
+}
+
 /* Reduced Motion Settings (Instant swap / 150ms crossfade, no 3D rotation) */
 @mixin reduced-motion-about {
   .about-section {
     .id-card-stage {
       perspective: none !important;
+
+      /* Disable entrance animation and hover in reduced motion */
+      animation: none !important;
+      transition: none !important;
 
       .id-card-flipper {
         transition: none !important;

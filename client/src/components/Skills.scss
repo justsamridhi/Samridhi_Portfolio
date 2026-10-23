@@ -75,9 +75,10 @@
         padding: 0.6rem 0.8rem;
         border: 1px solid transparent;
         border-radius: 10px;
-        transition: background 0.2s, border-color 0.2s;
+        transition: background 0.2s, border-color 0.2s, transform 0.2s ease;
 
         &:hover, &:focus-visible {
+          transform: translateX(4px);
           background: color-mix(in srgb, var(--paper) 60%, var(--bg));
           border-color: var(--line);
         }
