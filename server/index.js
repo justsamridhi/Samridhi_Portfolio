@@ -30,7 +30,7 @@ const allowedOrigins = allowedOrigin
   : [];
 
 // Debug logging for CORS issues
-console.log("CORS allowed origins:");
+console.log(`CORS allowed origins: ${allowedOrigins.length ? allowedOrigins.join(", ") : "all (dev mode)"}`);
 
 app.use(cors({
   origin: (origin, callback) => {
@@ -92,7 +92,7 @@ const PORT = process.env.PORT || 5000;
   try {
     await dbConnect();
     app.listen(PORT, () => {
-      console.log("Server listening on http://localhost:");
+      console.log(`Server listening on http://localhost:${PORT}`);
     });
   } catch (e) {
     console.error('Failed to start server:', e);
