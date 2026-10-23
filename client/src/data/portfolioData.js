@@ -92,7 +92,7 @@ export const skillsData = [
 // Verified education and experience timeline
 export const timelineData = [
   {
-    period: "2022 — Present",
+    period: "2024 — Present",
     title: "B.Tech in Computer Science & Engineering",
     organization: "Undergraduate Studies — Jaipur, Rajasthan",
     type: "education",
@@ -207,4 +207,143 @@ export const stickerPack = [
   { id: "curious", name: "Curious", src: "/assets/samridhi_individual_avatar_poses/11_expression_curious.png" },
   { id: "winking", name: "Winking", src: "/assets/samridhi_individual_avatar_poses/12_expression_winking.png" },
   { id: "bashful", name: "Bashful", src: "/assets/samridhi_individual_avatar_poses/14_expression_bashful.png" }
+];
+
+// Rebuilt About section data: Developer_ID.EXE × Creative_ID.EXE
+export const aboutData = {
+  eyebrow: "ABOUT / COMPUTER SCIENCE",
+  heading: "Building systems. Understanding how they work.",
+  identityLine: "Undergraduate · B.Tech Computer Science & Engineering · JKLU · Batch 2024–2028",
+
+  profiles: {
+    developer: {
+      id: "developer",
+      tabLabel: "Developer_ID.EXE",
+      card: {
+        title: "DEVELOPER_ID.EXE",
+        subtitle: "// COMPUTER SCIENCE MODE",
+        status: "ACCESS: GRANTED",
+        name: "SAMRIDHI GUPTA",
+        education: "B.Tech Computer Science & Engineering",
+        university: "JK Lakshmipat University (JKLU)",
+        batch: "2024–2028",
+        focusChips: [
+          "Systems",
+          "Cloud",
+          "Cybersecurity",
+          "Software Engineering",
+          "AI / ML",
+          "Data Structures & Algorithms"
+        ],
+        techChips: [
+          "C",
+          "C++",
+          "Python",
+          "Java",
+          "React",
+          "Node.js",
+          "Express",
+          "MongoDB",
+          "FastAPI",
+          "SQL",
+          "Linux (RH124)",
+          "Git & GitHub"
+        ],
+        roleStrip: "STUDENT · RESEARCHER · DEVELOPER",
+        quote: "Building reliable software. Exploring what's next.",
+        footer: "// VERSION 3.0"
+      },
+      written: {
+        research: {
+          title: "Research & Engineering",
+          intro: "My technical passion lies at the intersection of systems programming, cybersecurity static analysis, and practical full-stack web applications. I enjoy understanding the internal mechanics of how systems execute—from parsing compiled bytecodes in Android APKs to modeling large-scale spatial migrations.",
+          items: [
+            {
+              role: "Cybersecurity Research Intern (ISEA-III)",
+              org: "MNIT Jaipur",
+              details: "Investigated network security protocols, vulnerability assessment methodologies, and Android platform bytecode security analysis."
+            },
+            {
+              role: "Audio Deepfake Detection Research (LUSIP 2024)",
+              org: "LNMIIT Jaipur",
+              details: "Researched audio signal processing and acoustic feature classification to detect synthetic AI-generated voices."
+            }
+          ]
+        },
+        howIWork: {
+          title: "How I Work",
+          items: [
+            {
+              title: "Evidence-first engineering",
+              text: "I prioritize rigorous, deterministic logic and reproducible benchmarks over surface-level claims or hand-waving abstractions."
+            },
+            {
+              title: "Continuous systems learning",
+              text: "From low-level Linux administration (RH124) to distributed document stores, I invest in deep computer science foundations."
+            }
+          ]
+        },
+        direction: {
+          title: "Engineering Direction",
+          text: "I'm interested in how software systems are designed, built, and secured. I want to deepen my understanding of cloud computing, cybersecurity, system design, software engineering, and applied AI/ML through hands-on engineering and research. Game development is another area I'd like to explore in the future."
+        },
+        facts: [
+          { label: "Location", val: "Jaipur, Rajasthan, India" },
+          { label: "Current Status", val: "Undergraduate · 2024–2028" },
+          { label: "Core Focus", val: "MERN Stack • Systems • Security Analysis" },
+          { label: "Interests", val: "Research, Deepfake Forensics, Retro Pixel Art" }
+        ]
+      }
+    },
+    creative: {
+      id: "creative",
+      tabLabel: "Creative_ID.EXE",
+      card: {
+        title: "CREATIVE_ID.EXE",
+        subtitle: "// CREATIVE MODE ON",
+        status: "ACCESS: GRANTED",
+        name: "SAMRIDHI GUPTA",
+        interests: [
+          "Animation",
+          "Romcoms & K-dramas",
+          "Fitness",
+          "Art",
+          "Photography",
+          "Nature Walks"
+        ],
+        tools: [
+          "Figma",
+          "Canva",
+          "Adobe Creative Suite",
+          "Stitch",
+          "Lovable"
+        ],
+        quote: "Same girl. More dimensions.",
+        footer: "CREATE / EXPLORE / EXPERIMENT / REPEAT"
+      },
+      written: {
+        paragraph: "Outside my technical work, I enjoy art, photography, animation, and visual storytelling. I like experimenting with creative tools and exploring how design and technology can combine to create thoughtful, expressive digital experiences.",
+        howIWork: {
+          title: "Creative & thoughtful design",
+          text: "Digital tools should feel tactile, responsive, and humane—combining pixel craft with modern responsive architecture."
+        }
+      }
+    }
+  }
+};
+
+// 12 Original Paintings in Creative Corner Sketchbook Gallery
+export const paintingsData = [
+  { id: 1, src: "/art/art1.png", alt: "Original Painting 1" },
+  { id: 2, src: "/art/art2.png", alt: "Original Painting 2" },
+  { id: 3, src: "/art/art3.png", alt: "Original Painting 3" },
+  { id: 4, src: "/art/art4.png", alt: "Original Painting 4" },
+  { id: 5, src: "/art/art5.png", alt: "Original Painting 5" },
+  { id: 6, src: "/art/art6.png", alt: "Original Painting 6" },
+  { id: 7, src: "/art/art7.png", alt: "Original Painting 7" },
+  { id: 8, src: "/art/art8.png", alt: "Original Painting 8" },
+  { id: 9, src: "/art/art9.png", alt: "Original Painting 9" },
+  { id: 10, src: "/art/art10.png", alt: "Original Painting 10" },
+  { id: 11, src: "/art/art11.png", alt: "Original Painting 11" },
+  { id: 12, src: "/art/art12.png", alt: "Original Painting 12" }
 ];

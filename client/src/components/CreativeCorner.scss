@@ -12,11 +12,12 @@
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 1.8rem;
     margin-top: 1.8rem;
+    margin-bottom: 2rem;
   }
 
   .creative-card {
     background: var(--paper);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--line);
     border-radius: 20px;
     padding: 1.8rem;
     display: flex;
@@ -65,15 +66,734 @@
       h3 {
         font-family: var(--display);
         font-size: 1.15rem;
-        color: #f2ede4;
+        color: var(--ink);
         margin-bottom: 0.5rem;
       }
 
       p {
         font-size: 0.9rem;
-        color: #aba194;
+        color: var(--muted);
         line-height: 1.55;
       }
     }
   }
+
+  /* ============================================================ */
+  /* SKETCHBOOK EXPERIENCE CARD: COVER & PERMANENT CIRCULAR ARENA */
+  /* ============================================================ */
+  .sketchbook-experience-card {
+    background: var(--paper);
+    border: 1px solid var(--line-strong);
+    border-radius: 24px;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 12px 32px var(--shadow);
+    transition: border-color 0.25s var(--ease);
+
+    /* ------------------------------------------------------------ */
+    /* 1. INITIAL STATE: SKETCHBOOK COVER (25-35% ENLARGED ICON)    */
+    /* ------------------------------------------------------------ */
+    .sketchbook-cover-stage {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: clamp(1rem, 3vw, 2rem) 0;
+
+      .sketchbook-cover-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.4rem;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        padding: 1rem 1.5rem;
+        border-radius: 20px;
+        transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+        &:focus-visible {
+          outline: 2px solid var(--orange);
+          outline-offset: 6px;
+        }
+
+        /* Icon enlarged by ~30% from 220px to 286px on desktop */
+        .sketchbook-icon-frame {
+          position: relative;
+          width: clamp(230px, 32vw, 290px);
+          height: clamp(230px, 32vw, 290px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          .sketchbook-cover-art {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            filter: drop-shadow(0 14px 28px var(--shadow));
+            transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+          }
+
+          .cover-glow-ring {
+            position: absolute;
+            inset: -14px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(229, 138, 54, 0.28) 0%, transparent 70%);
+            opacity: 0.6;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            pointer-events: none;
+          }
+        }
+
+        .sketchbook-caption {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.45rem;
+          text-align: center;
+
+          .caption-tag {
+            font-family: var(--mono);
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: var(--sage);
+          }
+
+          .caption-title {
+            font-family: var(--display);
+            font-size: clamp(1.3rem, 2.8vw, 1.7rem);
+            color: var(--ink);
+            letter-spacing: 0.04em;
+          }
+
+          .interaction-cue {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.25rem;
+            padding: 0.45rem 1.2rem;
+            border-radius: 999px;
+            background: rgba(229, 138, 54, 0.12);
+            border: 1px solid rgba(229, 138, 54, 0.35);
+            color: var(--orange);
+            font-family: var(--mono);
+            font-size: 0.82rem;
+            font-weight: 600;
+            transition: all 0.25s var(--ease);
+
+            .sparkle-icon {
+              font-size: 0.75rem;
+              opacity: 0.85;
+            }
+          }
+        }
+
+        &:hover {
+          transform: translateY(-4px);
+
+          .sketchbook-cover-art {
+            transform: scale(1.04) rotate(-1.5deg);
+          }
+
+          .cover-glow-ring {
+            opacity: 1;
+            transform: scale(1.12);
+          }
+
+          .interaction-cue {
+            background: var(--orange);
+            color: #181615;
+            border-color: var(--orange);
+          }
+        }
+      }
+    }
+
+    /* ------------------------------------------------------------ */
+    /* 2. CIRCULAR GALLERY STAGE: PERMANENT BROWSING SCREEN         */
+    /* ------------------------------------------------------------ */
+    .sketchbook-circular-stage {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      .gallery-header-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+        padding-bottom: 0.85rem;
+        border-bottom: 1px solid var(--line);
+
+        .gallery-title-group {
+          display: flex;
+          align-items: baseline;
+          gap: 0.75rem;
+          flex-wrap: wrap;
+
+          .sketchbook-badge {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--sage);
+            background: rgba(163, 184, 140, 0.12);
+            border: 1px solid rgba(163, 184, 140, 0.28);
+            padding: 0.22rem 0.6rem;
+            border-radius: 4px;
+          }
+
+          .gallery-title {
+            font-family: var(--display);
+            font-size: 1.35rem;
+            color: var(--ink);
+            margin: 0;
+          }
+        }
+
+        .close-sketchbook-btn {
+          font-family: var(--mono);
+          font-size: 0.82rem;
+          padding: 0.45rem 1rem;
+          gap: 0.45rem;
+        }
+      }
+
+      /* CIRCULAR ARENA: Responsive radius via CSS custom property */
+      .circular-gallery-arena {
+        --circle-radius: clamp(170px, 32vw, 275px);
+        --item-width: clamp(66px, 9.5vw, 92px);
+        --item-height: clamp(86px, 12.5vw, 120px);
+
+        position: relative;
+        width: 100%;
+        min-height: calc(var(--circle-radius) * 2 + var(--item-height) + 40px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-block: 1rem;
+        user-select: none;
+
+        /* Center Sketchbook Hub */
+        .circle-center-hub {
+          position: absolute;
+          z-index: 2;
+          width: clamp(90px, 15vw, 135px);
+          height: clamp(90px, 15vw, 135px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          pointer-events: none;
+
+          .center-hub-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            image-rendering: pixelated;
+            filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.45));
+          }
+
+          .center-hub-halo {
+            position: absolute;
+            inset: -12px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(229, 138, 54, 0.18) 0%, transparent 70%);
+          }
+        }
+
+        /* Circular Painting Nodes */
+        .circle-paintings-ring {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          list-style: none;
+          margin: 0;
+          padding: 0;
+
+          .circle-painting-node {
+            position: absolute;
+            width: var(--item-width);
+            height: var(--item-height);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Stable position based on trigonometry */
+            transform: translate(
+              calc(var(--cos-a) * var(--circle-radius)),
+              calc(var(--sin-a) * var(--circle-radius))
+            );
+            z-index: 3;
+
+            .circle-painting-btn {
+              width: 100%;
+              height: 100%;
+              background: transparent;
+              border: none;
+              padding: 0;
+              cursor: pointer;
+              outline: none;
+              border-radius: 8px;
+              transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.25s ease;
+
+              .painting-frame {
+                width: 100%;
+                height: 100%;
+                background: #fbf8f2; /* Cream frame */
+                border: 2px solid rgba(0, 0, 0, 0.2);
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 3px;
+                box-sizing: border-box;
+                transition: border-color 0.25s ease, box-shadow 0.25s ease;
+
+                .node-painting-img {
+                  width: 100%;
+                  height: 100%;
+                  object-fit: contain;
+                  display: block;
+                  border-radius: 4px;
+                }
+              }
+
+              /* Subtle hover and focus highlight without moving the entire circle */
+              &:hover {
+                transform: scale(1.15);
+                z-index: 10;
+
+                .painting-frame {
+                  border-color: var(--orange);
+                  box-shadow: 0 8px 24px rgba(229, 138, 54, 0.45);
+                }
+              }
+
+              &:focus-visible {
+                transform: scale(1.15);
+                z-index: 10;
+                outline: 2px solid var(--orange);
+                outline-offset: 4px;
+
+                .painting-frame {
+                  border-color: var(--orange);
+                  box-shadow: 0 8px 24px rgba(229, 138, 54, 0.45);
+                }
+              }
+            }
+          }
+        }
+      }
+
+      /* Opening Reveal Animation: Staggered expansion into circle */
+      &.state-revealing {
+        .circle-center-hub {
+          animation: centerPulse 0.7s ease-out forwards;
+        }
+
+        .circle-painting-node {
+          animation: nodeBurstOut 0.65s cubic-bezier(0.18, 0.89, 0.32, 1.25) forwards;
+          animation-delay: var(--stagger-delay);
+          opacity: 0;
+        }
+      }
+
+      /* Settled State: Pure stable circle, no animation or movement */
+      &.state-settled {
+        .circle-painting-node {
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  /* ============================================================ */
+  /* INDIVIDUAL ARTWORK PREVIEW: ACCESSIBLE LIGHTBOX MODAL        */
+  /* ============================================================ */
+  .artwork-lightbox-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(14, 12, 11, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(1rem, 3vw, 2.5rem);
+    animation: overlayFade 0.2s ease forwards;
+
+    .artwork-lightbox-dialog {
+      background: var(--paper);
+      border: 1px solid var(--line-strong);
+      border-radius: 20px;
+      width: min(960px, 100%);
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.65);
+      animation: modalZoom 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+
+      .lightbox-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.85rem 1.4rem;
+        border-bottom: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.1);
+
+        .lightbox-counter {
+          font-family: var(--mono);
+          font-size: 0.84rem;
+          font-weight: 700;
+          color: var(--ink);
+          letter-spacing: 0.05em;
+        }
+
+        .lightbox-close-btn {
+          width: 34px;
+          height: 34px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 8px;
+          font-size: 1.1rem;
+          color: var(--muted);
+          background: transparent;
+          border: 1px solid transparent;
+          cursor: pointer;
+          transition: all 0.15s ease;
+
+          &:hover {
+            color: var(--ink);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--line);
+          }
+
+          &:focus-visible {
+            outline: 2px solid var(--orange);
+            outline-offset: 2px;
+          }
+        }
+      }
+
+      .lightbox-canvas-area {
+        position: relative;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1.2rem;
+        background: #110f0e;
+        overflow: hidden;
+
+        .lightbox-nav-btn {
+          width: 44px;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.08);
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          color: var(--ink);
+          font-size: 1.8rem;
+          line-height: 1;
+          cursor: pointer;
+          z-index: 5;
+          flex-shrink: 0;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background: var(--orange);
+            color: #181615;
+            border-color: var(--orange);
+            transform: scale(1.08);
+          }
+
+          &:focus-visible {
+            outline: 2px solid var(--orange);
+            outline-offset: 3px;
+          }
+        }
+
+        .lightbox-image-box {
+          flex: 1;
+          height: min(65vh, 600px);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.5rem;
+
+          .lightbox-full-img {
+            max-width: 100%;
+            max-height: 100%;
+            /* Strict contain: never crop, recolor or distort */
+            object-fit: contain;
+            border-radius: 6px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+            display: block;
+          }
+        }
+      }
+
+      .lightbox-footer {
+        padding: 0.75rem 1.4rem;
+        border-top: 1px solid var(--line);
+        background: rgba(0, 0, 0, 0.1);
+        text-align: center;
+
+        .lightbox-hint {
+          font-family: var(--mono);
+          font-size: 0.74rem;
+        }
+      }
+    }
+  }
+}
+
+/* ============================================================ */
+/* KEYFRAME ANIMATIONS (For opening reveal only)                */
+/* ============================================================ */
+@keyframes nodeBurstOut {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.2);
+  }
+  60% {
+    opacity: 1;
+    transform: translate(
+      calc(var(--cos-a) * var(--circle-radius) * 1.06),
+      calc(var(--sin-a) * var(--circle-radius) * 1.06)
+    ) scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(
+      calc(var(--cos-a) * var(--circle-radius)),
+      calc(var(--sin-a) * var(--circle-radius))
+    ) scale(1);
+  }
+}
+
+@keyframes centerPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes overlayFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalZoom {
+  from {
+    opacity: 0;
+    transform: scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================================================ */
+/* DAY DESK (LIGHT THEME) OVERRIDES                             */
+/* ============================================================ */
+[data-theme="light"] {
+  .creative-corner-section {
+    .creative-card {
+      background: #ffffff;
+      border-color: var(--line-strong);
+    }
+
+    .sketchbook-experience-card {
+      background: #ffffff;
+      border-color: var(--line-strong);
+      box-shadow: 0 10px 28px rgba(34, 31, 28, 0.1);
+
+      .sketchbook-cover-stage .sketchbook-cover-btn {
+        .interaction-cue {
+          background: rgba(217, 112, 15, 0.1);
+          border-color: rgba(217, 112, 15, 0.3);
+          color: var(--orange);
+        }
+
+        &:hover .interaction-cue {
+          background: var(--orange);
+          color: #ffffff;
+        }
+      }
+
+      .sketchbook-circular-stage {
+        .circular-gallery-arena {
+          .circle-paintings-ring .circle-painting-node .circle-painting-btn {
+            .painting-frame {
+              background: #faf4ea;
+              border-color: rgba(34, 31, 28, 0.16);
+              box-shadow: 0 4px 12px rgba(34, 31, 28, 0.12);
+            }
+
+            &:hover .painting-frame,
+            &:focus-visible .painting-frame {
+              border-color: var(--orange);
+              box-shadow: 0 8px 24px rgba(217, 112, 15, 0.35);
+            }
+          }
+        }
+      }
+    }
+
+    .artwork-lightbox-overlay {
+      background: rgba(245, 236, 225, 0.92);
+
+      .artwork-lightbox-dialog {
+        background: #ffffff;
+        border-color: var(--line-strong);
+
+        .lightbox-canvas-area {
+          background: #faf4ea;
+
+          .lightbox-nav-btn {
+            background: #ffffff;
+            border-color: rgba(34, 31, 28, 0.2);
+            color: var(--ink);
+
+            &:hover {
+              background: var(--orange);
+              color: #ffffff;
+              border-color: var(--orange);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ============================================================ */
+/* RESPONSIVE BREAKPOINTS (Mobile & Tablets)                    */
+/* ============================================================ */
+@media (max-width: 600px) {
+  .creative-corner-section {
+    .creative-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .sketchbook-experience-card {
+      padding: 1.2rem 0.8rem;
+
+      .sketchbook-cover-stage .sketchbook-cover-btn {
+        padding: 0.6rem;
+        width: 100%;
+
+        .sketchbook-icon-frame {
+          width: 220px;
+          height: 220px;
+        }
+      }
+
+      .sketchbook-circular-stage {
+        .circular-gallery-arena {
+          --circle-radius: 145px;
+          --item-width: 58px;
+          --item-height: 76px;
+          min-height: 380px;
+
+          .circle-center-hub {
+            width: 78px;
+            height: 78px;
+          }
+        }
+      }
+    }
+
+    .artwork-lightbox-overlay {
+      padding: 0.5rem;
+
+      .artwork-lightbox-dialog {
+        max-height: 96vh;
+
+        .lightbox-canvas-area {
+          padding: 0.5rem;
+
+          .lightbox-nav-btn {
+            width: 36px;
+            height: 36px;
+            font-size: 1.4rem;
+          }
+
+          .lightbox-image-box {
+            height: 55vh;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* ============================================================ */
+/* REDUCED MOTION SETTINGS (Instant circular display)           */
+/* ============================================================ */
+@mixin reduced-motion-creative-corner {
+  .creative-corner-section {
+    .sketchbook-cover-btn,
+    .sketchbook-cover-art,
+    .cover-glow-ring {
+      transition: none !important;
+      transform: none !important;
+      animation: none !important;
+    }
+
+    .sketchbook-circular-stage {
+      .circle-center-hub {
+        animation: none !important;
+      }
+
+      .circle-painting-node {
+        animation: none !important;
+        opacity: 1 !important;
+      }
+
+      .circle-painting-btn {
+        transition: none !important;
+      }
+    }
+
+    .artwork-lightbox-overlay {
+      animation: none !important;
+
+      .artwork-lightbox-dialog {
+        animation: none !important;
+      }
+    }
+  }
+}
+
+html[data-reduced-motion="true"] {
+  @include reduced-motion-creative-corner;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @include reduced-motion-creative-corner;
 }

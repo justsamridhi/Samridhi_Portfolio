@@ -25,6 +25,7 @@ const copyRecursive = (src, dest) => {
 try {
   copyRecursive(path.join(rootDir, 'assets'), path.join(clientPublicDir, 'assets'));
   copyRecursive(path.join(rootDir, 'documents'), path.join(clientPublicDir, 'documents'));
+  copyRecursive(path.join(rootDir, 'art'), path.join(clientPublicDir, 'art'));
 } catch (e) {
   console.warn('Syncing static assets:', e.message);
 }

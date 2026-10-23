@@ -1,5 +1,4 @@
 import express from 'express';
-import mongoose from 'mongoose';
 import Guestbook from '../models/Guestbook.js';
 
 const router = express.Router();
@@ -27,8 +26,12 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   try {
     const { gridData } = req.body;
-    if (!Array.isArray(gridData) || gridData.length !== 256) {
-      return res.status(400).json({ error: 'Invalid grid data' });
+    if (
+      !Array.isArray(gridData) ||
+      gridData.length !== 256 ||
+      !gridData.every(c => c === 'transparent' || /^#[0-9a-fA-F]{6}$/.test(c))
+    ) {
+      return res.status(400).json({ error: 'Invalid drawing data' });
     }
     const entry = new Guestbook({
       gridData,
@@ -55,8 +58,8 @@ router.get('/pending', adminAuth, async (req, res, next) => {
 // Admin: approve submission
 router.patch('/:id/approve', adminAuth, async (req, res, next) => {
   try {
-    // Validate MongoDB ObjectId
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    // Validate MongoDB ObjectId (strict 24-character hexadecimal)
+    if (!/^[0-9a-fA-F]{24}$/.test(req.params.id)) {
       return res.status(400).json({ error: 'Invalid entry id' });
     }
     
@@ -73,8 +76,8 @@ router.patch('/:id/approve', adminAuth, async (req, res, next) => {
 // Admin: reject (delete) submission
 router.delete('/:id', adminAuth, async (req, res, next) => {
   try {
-    // Validate MongoDB ObjectId
-    if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    // Validate MongoDB ObjectId (strict 24-character hexadecimal)
+    if (!/^[0-9a-fA-F]{24}$/.test(req.params.id)) {
       return res.status(400).json({ error: 'Invalid entry id' });
     }
     

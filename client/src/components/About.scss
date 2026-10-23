@@ -1,114 +1,664 @@
 .about-section {
-  .about-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
-    gap: 1.5rem;
-    align-items: start;
+  padding-block: clamp(2rem, 5vh, 4rem);
+
+  /* 3. Always-visible identity line */
+  .identity-banner {
+    margin-top: -0.25rem;
+    margin-bottom: 1.5rem;
+
+    .identity-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+      .identity-status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--sage);
+        box-shadow: 0 0 6px var(--sage);
+        flex-shrink: 0;
+      }
+    }
   }
 
-  .about-card {
+  /* 4. Profile tabs row */
+  .profile-tabs-row {
     display: flex;
-    flex-direction: column;
-    gap: 1.4rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
 
-    .avatar-art-badge {
-      align-self: flex-start;
-      width: clamp(120px, 20vw, 160px);
-      border: 1.5px solid var(--line);
-      border-radius: 14px;
-      padding: 0.5rem;
-      background: var(--bg);
-      box-shadow: 2px 2px 0 var(--shadow);
+    .profile-tabs {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.35rem;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 12px;
 
-      .art-pose-img {
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-        image-rendering: pixelated;
-      }
-    }
+      .profile-tab-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.45rem 1.1rem;
+        border-radius: 8px;
+        font-family: var(--mono);
+        font-size: 0.84rem;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        color: var(--muted);
+        background: transparent;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all 0.2s var(--ease);
 
-    .bio-text {
-      font-size: 1.05rem;
-      line-height: 1.65;
-      color: var(--ink);
-
-      p + p {
-        margin-top: 0.9rem;
-      }
-
-      strong {
-        color: var(--orange);
-      }
-    }
-
-    .quick-facts {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      padding-top: 1.2rem;
-      border-top: 1px dashed var(--line);
-
-      .fact-item {
-        display: flex;
-        flex-direction: column;
-        gap: 0.2rem;
-
-        .fact-label {
-          font-family: var(--mono);
-          font-size: 0.75rem;
-          color: var(--muted);
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
+        .tab-marker {
+          font-size: 0.65rem;
+          opacity: 0.5;
+          transition: opacity 0.2s var(--ease);
         }
 
-        .fact-val {
+        &:hover {
+          color: var(--ink);
+          background: rgba(255, 255, 255, 0.04);
+        }
+
+        &:focus-visible {
+          outline: 2px solid var(--orange);
+          outline-offset: 2px;
+        }
+
+        &.dev-tab.is-active {
+          color: #1a250f;
+          background: var(--sage);
+          border-color: var(--sage);
+          box-shadow: 0 2px 8px rgba(163, 184, 140, 0.35);
+
+          .tab-marker {
+            opacity: 1;
+          }
+        }
+
+        &.creative-tab.is-active {
+          color: #261304;
+          background: var(--orange);
+          border-color: var(--orange);
+          box-shadow: 0 2px 8px rgba(229, 138, 54, 0.35);
+
+          .tab-marker {
+            opacity: 1;
+          }
+        }
+      }
+    }
+
+    .flip-action-btn {
+      padding: 0.45rem 1rem;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      gap: 0.45rem;
+
+      &:focus-visible {
+        outline: 2px solid var(--orange);
+        outline-offset: 2px;
+      }
+
+      .flip-icon {
+        font-size: 0.95rem;
+        transition: transform 0.3s var(--ease);
+      }
+
+      &:hover .flip-icon {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  /* 5. Interactive Two-Sided ID Card Container */
+  .id-card-stage {
+    perspective: 1200px;
+    max-width: 760px;
+    width: 100%;
+    margin-inline: auto; /* Centered */
+    margin-bottom: 2.5rem;
+    cursor: pointer;
+    user-select: text;
+    transition: transform 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+
+    .id-card-flipper {
+      position: relative;
+      display: grid;
+      width: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.7s cubic-bezier(0.34, 1.2, 0.64, 1);
+    }
+
+    &.show-creative .id-card-flipper {
+      transform: rotateY(180deg);
+    }
+
+    /* Both faces sit in the same CSS grid cell */
+    .id-card-face {
+      grid-area: 1 / 1;
+      width: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 14px 40px var(--shadow), 0 2px 8px rgba(0, 0, 0, 0.12);
+      box-sizing: border-box;
+      transition: visibility 0.7s step-end, box-shadow 0.35s ease;
+
+      /* Full width, max-width 760px, height auto, no cropping */
+      .id-card-img {
+        width: 100%;
+        max-width: 760px;
+        height: auto;
+        display: block;
+        object-fit: contain;
+        image-rendering: pixelated;
+        image-rendering: crisp-edges;
+      }
+
+      &.developer-face {
+        transform: rotateY(0deg);
+      }
+
+      &.creative-face {
+        transform: rotateY(180deg);
+      }
+
+      &.is-active-face {
+        visibility: visible;
+        pointer-events: auto;
+      }
+
+      &.is-hidden-face {
+        visibility: hidden;
+        pointer-events: none;
+      }
+    }
+  }
+
+  /* 6. Selectable Profile Overview Block & Written Panels */
+  .about-panels-stage {
+    .written-panel {
+      animation: panelFadeIn 0.35s var(--ease) forwards;
+
+      &[hidden] {
+        display: none !important;
+      }
+    }
+
+    .panel-sections-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .panel-block {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: clamp(1.2rem, 3vw, 1.8rem);
+
+      .block-head {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 0.85rem;
+        flex-wrap: wrap;
+
+        .section-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 2px;
+
+          &.sage-dot {
+            background: var(--sage);
+          }
+
+          &.orange-dot {
+            background: var(--orange);
+          }
+        }
+
+        .block-title, .facts-heading {
+          font-family: var(--display);
+          font-size: 1.25rem;
+          color: var(--ink);
+          margin-bottom: 0;
+        }
+
+        .role-strip-badge {
+          margin-left: auto;
+          font-family: var(--mono);
+          font-size: 0.72rem;
+          font-weight: 700;
+          letter-spacing: 0.06em;
+          padding: 0.25rem 0.65rem;
+          border-radius: 4px;
+        }
+      }
+
+      .block-intro {
+        font-size: 1rem;
+        line-height: 1.65;
+        color: var(--ink);
+        margin-bottom: 1.25rem;
+        max-width: 75ch;
+      }
+    }
+
+    /* Profile Overview Card (Selectable text + chips) */
+    .profile-overview-card {
+      &.dev-profile-card {
+        border-color: rgba(163, 184, 140, 0.35);
+
+        .role-strip-badge {
+          background: rgba(163, 184, 140, 0.15);
+          color: var(--sage);
+          border: 1px solid rgba(163, 184, 140, 0.3);
+        }
+
+        .focus-chip .chip-pixel-dot {
+          background: #84986b;
+        }
+
+        .tech-chip .chip-pixel-dot {
+          background: #3b5025;
+        }
+      }
+
+      &.creative-profile-card {
+        border-color: rgba(229, 138, 54, 0.35);
+
+        .role-strip-badge {
+          background: rgba(229, 138, 54, 0.15);
+          color: var(--orange);
+          border: 1px solid rgba(229, 138, 54, 0.3);
+        }
+
+        .creative-chip .chip-pixel-dot {
+          background: #c86c1c;
+        }
+
+        .tool-chip .chip-pixel-dot {
+          background: #e58a36;
+        }
+      }
+
+      .profile-chips-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+
+        .chips-group {
+          .chips-group-label {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+            margin-bottom: 0.5rem;
+          }
+
+          .chips-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem 0.55rem;
+            margin: 0;
+            padding: 0;
+
+            .profile-chip {
+              display: inline-flex;
+              align-items: center;
+              gap: 0.4rem;
+              padding: 0.28rem 0.65rem;
+              border-radius: 6px;
+              font-family: var(--mono);
+              font-size: 0.8rem;
+              font-weight: 600;
+              /* Dark ink on cream/surface background: 4.5:1 contrast */
+              background: #fbf8f2;
+              color: #191715;
+              border: 1px solid rgba(0, 0, 0, 0.18);
+              box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+              transition: transform 0.15s var(--ease), border-color 0.15s ease;
+
+              .chip-pixel-dot {
+                width: 6px;
+                height: 6px;
+                border-radius: 1px;
+                flex-shrink: 0;
+              }
+
+              &:hover {
+                transform: translateY(-1px);
+                border-color: rgba(0, 0, 0, 0.35);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    /* Research Items Grid */
+    .research-items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+
+      .research-card {
+        padding: 1rem 1.15rem;
+        border-radius: 10px;
+        background: var(--bg);
+        border: 1px solid var(--line);
+
+        .research-role {
           font-weight: 600;
           font-size: 0.95rem;
           color: var(--ink);
+          margin-bottom: 0.2rem;
+        }
+
+        .research-org {
+          font-family: var(--mono);
+          font-size: 0.78rem;
+          color: var(--sage);
+          margin-bottom: 0.45rem;
+        }
+
+        .research-details {
+          font-size: 0.88rem;
+          line-height: 1.5;
+          color: var(--muted);
+          margin: 0;
         }
       }
     }
-  }
 
-  .values-column {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
+    /* Two-col for How I Work & Engineering Direction */
+    .panel-two-col {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
 
-    .value-card {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      padding: 1.2rem;
+      .work-values-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
 
-      .value-icon {
-        width: 44px;
-        height: 44px;
-        margin-bottom: 0.3rem;
+        .work-val-item {
+          padding-left: 0.85rem;
+          border-left: 2px solid var(--sage);
 
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain;
+          .val-title {
+            display: block;
+            font-size: 0.94rem;
+            color: var(--ink);
+            margin-bottom: 0.2rem;
+          }
+
+          .val-text {
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: var(--muted);
+            margin: 0;
+          }
         }
       }
 
-      h3 {
-        font-size: 1.15rem;
+      .direction-text {
+        font-size: 0.95rem;
+        line-height: 1.65;
+        color: var(--ink);
+        margin: 0;
+      }
+    }
+
+    /* 7. Semantic DL Facts Row */
+    .facts-block {
+      .compact-facts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.25rem 1rem;
+        padding-top: 0.5rem;
+
+        .fact-unit {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+
+          .fact-label {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+          }
+
+          .fact-value {
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    /* Creative Panel Specific */
+    .creative-intro-card {
+      .creative-main-paragraph {
+        font-size: 1.05rem;
+        line-height: 1.65;
+        color: var(--ink);
+        margin-bottom: 1.2rem;
+        max-width: 72ch;
       }
 
-      p {
+      .creative-supporting-line {
+        padding: 0.85rem 1.1rem;
+        border-radius: 8px;
+        background: var(--bg);
+        border-left: 3px solid var(--orange);
         font-size: 0.92rem;
-        color: var(--muted);
         line-height: 1.5;
+
+        .supporting-title {
+          color: var(--ink);
+        }
+
+        .supporting-text {
+          color: var(--muted);
+        }
       }
     }
   }
 }
 
-@media (max-width: 860px) {
-  .about-section .about-grid {
-    grid-template-columns: 1fr;
+/* Panel FadeIn Keyframe */
+@keyframes panelFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
   }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Day Desk (Light Theme) Overrides */
+[data-theme="light"] {
+  .about-section {
+    .identity-banner .identity-pill {
+      background: #ffffff;
+      border-color: var(--line-strong);
+      color: var(--ink);
+    }
+
+    .profile-tabs-row .profile-tabs {
+      background: #ffffff;
+      border-color: var(--line-strong);
+
+      .profile-tab-btn:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+
+    .id-card-stage .id-card-face {
+      box-shadow: 0 10px 24px rgba(34, 31, 28, 0.12), 0 2px 6px rgba(34, 31, 28, 0.06);
+    }
+
+    .about-panels-stage {
+      .panel-block {
+        background: #ffffff;
+      }
+
+      .profile-overview-card .profile-chips-layout .chips-group .chips-list .profile-chip {
+        background: #faf4ea;
+        border-color: rgba(0, 0, 0, 0.15);
+      }
+
+      .research-items-grid .research-card {
+        background: #faf4ea;
+      }
+
+      .creative-intro-card .creative-supporting-line {
+        background: #faf4ea;
+      }
+    }
+  }
+}
+
+/* Responsive Breakpoints: 375px mobile */
+@media (max-width: 480px) {
+  .about-section {
+    .identity-banner .identity-pill {
+      font-size: 0.74rem;
+      padding: 0.4rem 0.75rem;
+      line-height: 1.4;
+    }
+
+    .profile-tabs-row {
+      flex-direction: column;
+      align-items: stretch;
+
+      .profile-tabs {
+        width: 100%;
+        justify-content: stretch;
+
+        .profile-tab-btn {
+          flex: 1;
+          justify-content: center;
+          padding: 0.45rem 0.6rem;
+          font-size: 0.76rem;
+        }
+      }
+
+      .flip-action-btn {
+        width: 100%;
+      }
+    }
+
+    .about-panels-stage {
+      .profile-overview-card {
+        .block-head .role-strip-badge {
+          margin-left: 0;
+          width: 100%;
+          text-align: center;
+        }
+
+        .profile-chips-layout .chips-group .chips-list .profile-chip {
+          font-size: 12px; /* Minimum 12px readability requirement */
+          padding: 0.22rem 0.5rem;
+        }
+      }
+
+      .facts-block .compact-facts-grid {
+        grid-template-columns: 1fr;
+        gap: 0.85rem;
+      }
+    }
+  }
+}
+
+/* Reduced Motion Settings (Instant swap / 150ms crossfade, no 3D rotation) */
+@mixin reduced-motion-about {
+  .about-section {
+    .id-card-stage {
+      perspective: none !important;
+
+      .id-card-flipper {
+        transition: none !important;
+        transform: none !important;
+      }
+
+      .id-card-face {
+        transition: opacity 0.15s ease !important;
+
+        &.developer-face {
+          transform: none !important;
+        }
+
+        &.creative-face {
+          transform: none !important;
+        }
+
+        &.is-active-face {
+          opacity: 1;
+          visibility: visible;
+        }
+
+        &.is-hidden-face {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+    }
+
+    .profile-tabs-row .flip-action-btn:hover .flip-icon {
+      transform: none !important;
+    }
+
+    .about-panels-stage {
+      .written-panel {
+        animation: none !important;
+      }
+
+      .profile-overview-card .profile-chips-layout .chips-group .chips-list .profile-chip:hover {
+        transform: none !important;
+      }
+    }
+  }
+}
+
+html[data-reduced-motion="true"] {
+  @include reduced-motion-about;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @include reduced-motion-about;
 }
